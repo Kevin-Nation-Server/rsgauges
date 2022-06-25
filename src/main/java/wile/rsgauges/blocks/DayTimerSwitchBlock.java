@@ -10,7 +10,8 @@ package wile.rsgauges.blocks;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -94,17 +95,17 @@ public class DayTimerSwitchBlock extends AutoSwitchBlock
         setChanged();
       }
       {
-        TextComponent separator = (new TextComponent(" | ")); separator.withStyle(ChatFormatting.GRAY);
+        MutableComponent separator = (Component.literal(" | ")); separator.withStyle(ChatFormatting.GRAY);
         ArrayList<Object> tr = new ArrayList<>();
-        tr.add(Auxiliaries.localizable("switchconfig.daytimerclock.daytime_on", ChatFormatting.BLUE, new Object[]{Auxiliaries.daytimeToString((long)(threshold0_on()*24000.0/15.0))}));
-        tr.add(separator.copy().append(Auxiliaries.localizable("switchconfig.daytimerclock.daytime_off", ChatFormatting.YELLOW, new Object[]{Auxiliaries.daytimeToString((long)(threshold0_off()*24000.0/15.0))})));
-        tr.add(separator.copy().append(Auxiliaries.localizable("switchconfig.daytimerclock.output_power", ChatFormatting.RED, new Object[]{on_power()})));
+        tr.add(Auxiliaries.localizable("switchconfig.daytimerclock.daytime_on", ChatFormatting.BLUE, Auxiliaries.daytimeToString((long)(threshold0_on()*24000.0/15.0))));
+        tr.add(separator.copy().append(Auxiliaries.localizable("switchconfig.daytimerclock.daytime_off", ChatFormatting.YELLOW, Auxiliaries.daytimeToString((long)(threshold0_off()*24000.0/15.0)))));
+        tr.add(separator.copy().append(Auxiliaries.localizable("switchconfig.daytimerclock.output_power", ChatFormatting.RED, on_power())));
         if(debounce()>0) {
-          tr.add(separator.copy().append(Auxiliaries.localizable("switchconfig.daytimerclock.random", ChatFormatting.DARK_GREEN, new Object[]{debounce()}) ));
+          tr.add(separator.copy().append(Auxiliaries.localizable("switchconfig.daytimerclock.random", ChatFormatting.DARK_GREEN, debounce()) ));
         } else {
-          tr.add(new TextComponent(""));
+          tr.add(Component.empty());
         }
-        tr.add(separator.copy().append(Auxiliaries.localizable("switchconfig.daytimerclock.output_power", ChatFormatting.RED, new Object[]{on_power()})));
+        tr.add(separator.copy().append(Auxiliaries.localizable("switchconfig.daytimerclock.output_power", ChatFormatting.RED, on_power())));
         Overlay.show(player, Auxiliaries.localizable("switchconfig.daytimerclock", ChatFormatting.RESET, tr.toArray()));
       }
       return true;

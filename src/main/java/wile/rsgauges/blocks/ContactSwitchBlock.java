@@ -13,8 +13,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -238,16 +237,16 @@ public class ContactSwitchBlock extends SwitchBlock
       }
       {
         Overlay.show(player,
-          (new TextComponent(""))
-            .append(Auxiliaries.localizable("switchconfig.touchcontactmat.sensitivity", ChatFormatting.BLUE, new Object[]{
-                Auxiliaries.localizable("switchconfig.touchcontactmat.sensitivity." + (high_sensitivity() ? "high":"normal"))
-              }))
+          (Component.empty())
+            .append(Auxiliaries.localizable("switchconfig.touchcontactmat.sensitivity", ChatFormatting.BLUE,
+                    Auxiliaries.localizable("switchconfig.touchcontactmat.sensitivity." + (high_sensitivity() ? "high":"normal"))))
             .append(" | ")
-            .append(Auxiliaries.localizable("switchconfig.touchcontactmat.entity_threshold", ChatFormatting.YELLOW, new Object[]{entity_count_threshold()}))
+            .append(Auxiliaries.localizable("switchconfig.touchcontactmat.entity_threshold", ChatFormatting.YELLOW, entity_count_threshold()))
             .append(" | ")
-            .append(Auxiliaries.localizable("switchconfig.touchcontactmat.entity_filter", ChatFormatting.DARK_GREEN, new Object[]{new TranslatableComponent("rsgauges.switchconfig.touchcontactmat.entity_filter."+filter_class_names[filter_])}))
+            .append(Auxiliaries.localizable("switchconfig.touchcontactmat.entity_filter", ChatFormatting.DARK_GREEN,
+                    Component.translatable("rsgauges.switchconfig.touchcontactmat.entity_filter."+filter_class_names[filter_])))
             .append(" | ")
-            .append(Auxiliaries.localizable("switchconfig.touchcontactmat.output_power", ChatFormatting.RED, new Object[]{on_power()}))
+            .append(Auxiliaries.localizable("switchconfig.touchcontactmat.output_power", ChatFormatting.RED, on_power()))
         );
       }
       return true;

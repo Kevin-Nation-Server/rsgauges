@@ -14,7 +14,6 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -48,7 +47,7 @@ public class Overlay
   @OnlyIn(Dist.CLIENT)
   public static class TextOverlayGui extends Screen
   {
-    private static final Component EMPTY_TEXT = new TextComponent("");
+    private static final Component EMPTY_TEXT = Component.empty();
     private static double overlay_y_ = 0.75;
     private static int text_color_ = 0x00ffaa00;
     private static int border_color_ = 0xaa333333;
@@ -83,10 +82,10 @@ public class Overlay
     { text_ = (s==null)?(EMPTY_TEXT):(s.copy()); deadline_ = System.currentTimeMillis() + displayTimeoutMs; }
 
     public static synchronized void show(String s, int displayTimeoutMs)
-    { text_ = ((s==null)||(s.isEmpty()))?(EMPTY_TEXT):(new TextComponent(s)); deadline_ = System.currentTimeMillis() + displayTimeoutMs; }
+    { text_ = ((s==null)||(s.isEmpty()))?(EMPTY_TEXT):(Component.literal(s)); deadline_ = System.currentTimeMillis() + displayTimeoutMs; }
 
     TextOverlayGui()
-    { super(new TextComponent("")); mc = SidedProxy.mc(); }
+    { super(EMPTY_TEXT); mc = SidedProxy.mc(); }
 
     @SubscribeEvent
     public void onRenderGui(RenderGameOverlayEvent.Post event)

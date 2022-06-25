@@ -11,7 +11,8 @@ package wile.rsgauges.blocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
@@ -195,13 +196,13 @@ public class ComparatorSwitchBlock extends AutoSwitchBlock
         setChanged();
       }
       {
-        TextComponent separator = (new TextComponent(" | ")); separator.withStyle(ChatFormatting.GRAY);
+        MutableComponent separator = (Component.literal(" | ")); separator.withStyle(ChatFormatting.GRAY);
         ArrayList<Object> tr = new ArrayList<>();
-        tr.add(Auxiliaries.localizable("switchconfig.comparator_switch.threshold_on", ChatFormatting.BLUE, new Object[]{(int)threshold0_on()}));
-        tr.add(separator.copy().append(Auxiliaries.localizable("switchconfig.comparator_switch.threshold_off", ChatFormatting.YELLOW, new Object[]{(int)threshold0_off()})));
-        tr.add(separator.copy().append(Auxiliaries.localizable("switchconfig.comparator_switch.output_power", ChatFormatting.RED, new Object[]{(int)on_power()})));
-        tr.add(separator.copy().append(Auxiliaries.localizable("switchconfig.comparator_switch.mode"+((int)acquisition_mode()), ChatFormatting.DARK_GREEN, new Object[]{})));
-        tr.add(separator.copy().append(Auxiliaries.localizable("switchconfig.comparator_switch.output_power", ChatFormatting.RED, new Object[]{(int)on_power()})));
+        tr.add(Auxiliaries.localizable("switchconfig.comparator_switch.threshold_on", ChatFormatting.BLUE, (int)threshold0_on()));
+        tr.add(separator.copy().append(Auxiliaries.localizable("switchconfig.comparator_switch.threshold_off", ChatFormatting.YELLOW, (int)threshold0_off())));
+        tr.add(separator.copy().append(Auxiliaries.localizable("switchconfig.comparator_switch.output_power", ChatFormatting.RED, (int)on_power())));
+        tr.add(separator.copy().append(Auxiliaries.localizable("switchconfig.comparator_switch.mode"+((int)acquisition_mode()), ChatFormatting.DARK_GREEN)));
+        tr.add(separator.copy().append(Auxiliaries.localizable("switchconfig.comparator_switch.output_power", ChatFormatting.RED, (int)on_power())));
         Overlay.show(player, Auxiliaries.localizable("switchconfig.comparator_switch", ChatFormatting.RESET, tr.toArray()));
       }
       return true;

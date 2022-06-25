@@ -16,8 +16,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -856,17 +856,17 @@ public class SwitchBlock extends RsDirectedBlock implements EntityBlock, SwitchL
     /**
      * Localisable switch status, normally called on double clicking a switch.
      */
-    public TranslatableComponent configStatusTextComponentTranslation(SwitchBlock block)
+    public Component configStatusTextComponentTranslation(SwitchBlock block)
     {
-      TextComponent separator = (new TextComponent(" | "));
+      MutableComponent separator = (Component.literal(" | "));
       separator.withStyle(ChatFormatting.GRAY);
-      TranslatableComponent status = Auxiliaries.localizable("switchconfig.options", ChatFormatting.RESET);
+      MutableComponent status = Auxiliaries.localizable("switchconfig.options", ChatFormatting.RESET);
       boolean statusset = false;
       if((on_power() < 15) || (off_power()>0)) {
         if((block == null) || ((block.config & (SWITCH_CONFIG_AUTOMATIC|SWITCH_CONFIG_LINK_SENDER))==0)) {
           // power only for non-auto-switches
           statusset = true;
-          status.append(Auxiliaries.localizable("switchconfig.options.output_power", ChatFormatting.RED, new Object[]{on_power()}));
+          status.append(Auxiliaries.localizable("switchconfig.options.output_power", ChatFormatting.RED, on_power()));
         }
       }
       if(nooutput()) {
@@ -881,10 +881,9 @@ public class SwitchBlock extends RsDirectedBlock implements EntityBlock, SwitchL
       }
       if(configured_on_time() > 0) {
         if(statusset) status.append(separator.copy());
-        status.append(Auxiliaries.localizable("switchconfig.options.pulsetime", ChatFormatting.GOLD, new Object[]{
-          Double.toString( ((double)(configured_on_time()))/20 ),
-          Integer.toString(configured_on_time())
-        }));
+        status.append(Auxiliaries.localizable("switchconfig.options.pulsetime", ChatFormatting.GOLD,
+                Double.toString( ((double)(configured_on_time()))/20 ),
+                Integer.toString(configured_on_time())));
       }
       return status;
     }

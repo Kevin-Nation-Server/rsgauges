@@ -70,7 +70,7 @@ public class DimmerSwitchBlock extends SwitchBlock
         te.on_power(p);
         p = te.on_power();
         Overlay.show(player,
-          Auxiliaries.localizable("switchconfig.dimmerswitch.output_power", ChatFormatting.RED, new Object[]{p})
+          Auxiliaries.localizable("switchconfig.dimmerswitch.output_power", ChatFormatting.RED, p)
         );
         final int state_p = state.getValue(POWER);
         if(state_p!=p) {
