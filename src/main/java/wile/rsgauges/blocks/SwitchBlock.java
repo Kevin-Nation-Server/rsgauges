@@ -19,6 +19,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -58,7 +59,6 @@ import wile.rsgauges.libmc.detail.Overlay;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.Random;
 
 
 @SuppressWarnings("unused")
@@ -341,7 +341,7 @@ public class SwitchBlock extends RsDirectedBlock implements EntityBlock, SwitchL
   }
 
   @Override
-  public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random)
+  public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random)
   {
     if(!state.getValue(POWERED)) return; // scheduler tick only allowed when currently active.
     final SwitchTileEntity te = getTe(world, pos);
