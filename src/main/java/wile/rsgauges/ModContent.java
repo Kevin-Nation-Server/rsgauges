@@ -63,7 +63,7 @@ public class ModContent
 
     private static <T extends RsBlock.RsTileEntity> RegistryObject<BlockEntityType<T>> register(String name, BlockEntityType.BlockEntitySupplier<T> ctor, Class<? extends Block> clazz)
     {
-      return register(name, ctor, blocks_of_type(clazz));
+      return TILE_ENTITIES.register(name, () -> BlockEntityType.Builder.of(ctor, blocks_of_type(clazz)).build(null));
     }
   }
 
