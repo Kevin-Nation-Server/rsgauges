@@ -95,7 +95,7 @@ public class Overlay
       if(text()==EMPTY_TEXT) return;
       String txt = text().getString();
       if(txt.isEmpty()) return;
-      PoseStack mxs = event.getMatrixStack();
+      PoseStack mxs = event.getPoseStack();
       final Window win = mc.getWindow();
       final Font fr = mc.font;
       final boolean was_unicode = fr.isBidirectional();
