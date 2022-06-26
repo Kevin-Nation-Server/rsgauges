@@ -8,9 +8,7 @@
  */
 package wile.rsgauges.libmc.detail;
 
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.*;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -92,12 +90,12 @@ public class OptionalRecipeCondition implements ICondition
   }
 
   @Override
-  public boolean test()
+  public boolean test(IContext context)
   {
     if(without_recipes) return false;
     if((experimental) && (!with_experimental)) return false;
     final IForgeRegistry<Item> item_registry = ForgeRegistries.ITEMS;
-    final Collection<ResourceLocation> item_tags = SerializationTags.getInstance().getOrEmpty(Registry.ITEM_REGISTRY).getAvailableTags();
+    final Collection<ResourceLocation> item_tags = item_registry.tags().stream().map(t -> t.getKey().location()).toList();
     if(result != null) {
       boolean item_registered = item_registry.containsKey(result);
       if(!item_registered) return false; // required result not registered
