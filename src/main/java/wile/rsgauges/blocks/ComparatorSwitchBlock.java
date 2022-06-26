@@ -79,7 +79,7 @@ public class ComparatorSwitchBlock extends AutoSwitchBlock
     public int link_output_power() { return link_output_power_; }
 
     public ComparatorSwitchTileEntity(BlockPos pos, BlockState state)
-    { super(ModContent.TET_COMPARATOR_SWITCH, pos, state); }
+    { super(ModContent.TET_COMPARATOR_SWITCH.get(), pos, state); }
 
     private interface Acquisition { int sample(Level world, BlockPos pos, BlockState state, Direction side); }
 

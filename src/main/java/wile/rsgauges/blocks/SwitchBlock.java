@@ -246,7 +246,7 @@ public class SwitchBlock extends RsDirectedBlock implements EntityBlock, SwitchL
       (!ModConfig.without_rightclick_item_switchconfig) &&
         (  ((ck.item==Items.REDSTONE) && (((SwitchBlock)state.getBlock()).config & SWITCH_CONFIG_PULSETIME_CONFIGURABLE) != 0)
           || (ck.item==Items.ENDER_PEARL)
-          || (ck.item==ModContent.SWITCH_LINK_PEARL)
+          || (ck.item==ModContent.SWITCH_LINK_PEARL.get())
         )
     ) {
       attack(state, world, pos, player);
@@ -298,7 +298,7 @@ public class SwitchBlock extends RsDirectedBlock implements EntityBlock, SwitchL
           }
         }
       }
-    } else if((ck.item==ModContent.SWITCH_LINK_PEARL) && (item_held==ModContent.SWITCH_LINK_PEARL)) {
+    } else if((ck.item==ModContent.SWITCH_LINK_PEARL.get()) && (item_held==ModContent.SWITCH_LINK_PEARL.get())) {
       // Link config at source switch or assignemnt of target switch
       if(!ModConfig.without_switch_linking) {
         switch (te.assignSwitchLink(world, pos, player.getInventory().getSelected())) {
@@ -595,7 +595,7 @@ public class SwitchBlock extends RsDirectedBlock implements EntityBlock, SwitchL
     { super(te_type, pos, state); }
 
     public SwitchTileEntity(BlockPos pos, BlockState state)
-    { super(ModContent.TET_SWITCH, pos, state); }
+    { super(ModContent.TET_SWITCH.get(), pos, state); }
 
     @Override
     public void write(CompoundTag nbt, boolean updatePacket)
@@ -1112,14 +1112,14 @@ public class SwitchBlock extends RsDirectedBlock implements EntityBlock, SwitchL
       } else if(item.getItem() == Items.ENDER_PEARL) {
         ck.item = Items.ENDER_PEARL;
         ck.item_count = item.getCount();
-      } else if(item.getItem() == ModContent.SWITCH_LINK_PEARL) {
-        ck.item = ModContent.SWITCH_LINK_PEARL;
+      } else if(item.getItem() == ModContent.SWITCH_LINK_PEARL.get()) {
+        ck.item = ModContent.SWITCH_LINK_PEARL.get();
         ck.item_count = item.getCount();
       } else if(item.getItem() != Items.AIR) {
         ck.wrenched = ModConfig.isWrench(item);
         if(ck.wrenched) return ck;
       }
-      if((facing!=null) && ((block.config & SWITCH_CONFIG_TOUCH_CONFIGURABLE)!=0) && (ck.item != ModContent.SWITCH_LINK_PEARL) && (ck.item != Items.ENDER_PEARL)) {
+      if((facing!=null) && ((block.config & SWITCH_CONFIG_TOUCH_CONFIGURABLE)!=0) && (ck.item != ModContent.SWITCH_LINK_PEARL.get()) && (ck.item != Items.ENDER_PEARL)) {
         return touch(ck, state, facing, x,y,z);
       } else {
         return ck;

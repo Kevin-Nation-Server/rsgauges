@@ -15,6 +15,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.Logger;
 import wile.rsgauges.libmc.detail.Auxiliaries;
@@ -169,7 +171,7 @@ public class ModConfig
   { return isOptedOut(block.asItem()); }
 
   public static final boolean isOptedOut(final @Nullable Item item)
-  { return (item!=null) && optouts_.contains(item.getRegistryName().getPath()); }
+  { return (item!=null) && optouts_.contains(ForgeRegistries.ITEMS.getKey(item).getPath()); }
 
   public static boolean withExperimental()
   { return with_experimental_features_; }
@@ -228,9 +230,10 @@ public class ModConfig
     {
       HashSet<String> optouts = new HashSet<>();
       ModContent.getRegisteredItems().stream().filter(Objects::nonNull).forEach(
-        e -> optouts.add(e.getRegistryName().getPath())
+        e -> optouts.add(e.getId().getPath())
       );
-      ModContent.getRegisteredBlocks().stream().filter((Block block) -> {
+      ModContent.getRegisteredBlocks().stream().filter((RegistryObject<Block> entry) -> {
+        Block block = entry.orElse(null);
         if(block==null) return true;
         try {
           if(!with_experimental_features_) {
@@ -238,7 +241,7 @@ public class ModConfig
             if(ModContent.isExperimentalBlock(block)) return true;
           }
           // Force-include/exclude pattern matching
-          final String rn = block.getRegistryName().getPath();
+          final String rn = entry.getId().getPath();
           try {
             for(String e : includes) {
               if(rn.matches(e)) {
@@ -260,7 +263,7 @@ public class ModConfig
         }
         return false;
       }).forEach(
-        e -> optouts.add(e.getRegistryName().getPath())
+        e -> optouts.add(e.getId().getPath())
       );
       optouts_ = optouts;
     }
@@ -303,6 +306,6 @@ public class ModConfig
   }
 
   public static final boolean isWrench(final ItemStack stack)
-  { return accepted_wrenches.contains(stack.getItem().getRegistryName()); }
+  { return accepted_wrenches.contains(ForgeRegistries.ITEMS.getKey(stack.getItem())); }
 
 }

@@ -101,7 +101,7 @@ public class AbstractGaugeBlock extends RsDirectedBlock implements EntityBlock, 
       GaugeTileEntity te = getTe(world, pos);
       if(te==null) return InteractionResult.CONSUME;
       te.on_wrench(state, world, pos, player, player.getItemInHand(hand));
-    } else if((stack_held.getItem() == Items.ENDER_PEARL) || (stack_held.getItem() == ModContent.SWITCH_LINK_PEARL)) {
+    } else if((stack_held.getItem() == Items.ENDER_PEARL) || (stack_held.getItem() == ModContent.SWITCH_LINK_PEARL.get())) {
       attack(state, world, pos, player);
     }
     return InteractionResult.CONSUME;
@@ -123,7 +123,7 @@ public class AbstractGaugeBlock extends RsDirectedBlock implements EntityBlock, 
         Overlay.show(player, Auxiliaries.localizable("switchlinking.target_assign.ok"));
         ModResources.BlockSoundEvents.SWITCHLINK_LINK_TARGET_SELECTED.play(world, pos);
       }
-    } else if(item_held.getItem() == ModContent.SWITCH_LINK_PEARL) {
+    } else if(item_held.getItem() == ModContent.SWITCH_LINK_PEARL.get()) {
       if(ModConfig.without_switch_linking) return;
       if(SwitchLinkPearlItem.cycleLinkMode(item_held, world, pos, true)) {
         Overlay.show(player, Auxiliaries.localizable("switchlinking.relayconfig.confval" + Integer.toString(SwitchLink.fromItemStack(item_held).mode().index())));
@@ -259,7 +259,7 @@ public class AbstractGaugeBlock extends RsDirectedBlock implements EntityBlock, 
     private int switchlink_input_ = 0;
 
     public GaugeTileEntity(BlockPos pos, BlockState state)
-    { super(ModContent.TET_GAUGE, pos, state); }
+    { super(ModContent.TET_GAUGE.get(), pos, state); }
 
     public int power()
     { return (int)((scd_ & GAUGE_DATA_POWER_MASK) >> GAUGE_DATA_POWER_SHIFT); }

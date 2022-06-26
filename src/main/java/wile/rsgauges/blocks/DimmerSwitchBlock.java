@@ -89,7 +89,7 @@ public class DimmerSwitchBlock extends SwitchBlock
       if(te.click_config(this, false)) {
         Overlay.show(player, te.configStatusTextComponentTranslation((SwitchBlock) state.getBlock()));
       }
-    } else if(ck.item== ModContent.SWITCH_LINK_PEARL) {
+    } else if(ck.item== ModContent.SWITCH_LINK_PEARL.get()) {
       attack(state, world, pos, player);
     }
     return InteractionResult.CONSUME;

@@ -73,7 +73,7 @@ public class IntervalTimerSwitchBlock extends AutoSwitchBlock
     { super(te_type, pos, state); }
 
     public IntervalTimerSwitchTileEntity(BlockPos pos, BlockState state)
-    { super(ModContent.TET_TIMER_SWITCH, pos, state); }
+    { super(ModContent.TET_TIMER_SWITCH.get(), pos, state); }
 
     private int p_set_  = 15;
     private int t_on_  = 20;

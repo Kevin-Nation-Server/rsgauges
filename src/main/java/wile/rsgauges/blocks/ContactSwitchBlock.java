@@ -160,7 +160,7 @@ public class ContactSwitchBlock extends SwitchBlock
     { super(te_type, pos, state); }
 
     public ContactSwitchTileEntity(BlockPos pos, BlockState state)
-    { super(ModContent.TET_CONTACT_SWITCH, pos, state); }
+    { super(ModContent.TET_CONTACT_SWITCH.get(), pos, state); }
 
     public int filter()
     { return filter_; }

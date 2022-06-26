@@ -173,7 +173,7 @@ public class SwitchLinkPearlItem extends RsItem
   {
     final BlockState state = world.getBlockState(pos);
     if(!(state.getBlock() instanceof SwitchLink.ISwitchLinkable)) return ItemStack.EMPTY;
-    ItemStack stack = new ItemStack(ModContent.SWITCH_LINK_PEARL);
+    ItemStack stack = new ItemStack(ModContent.SWITCH_LINK_PEARL.get());
     final SwitchLink.LinkMode mode = ((SwitchLink.ISwitchLinkable)state.getBlock()).switchLinkGetSupportedTargetModes().get(0);
     stack.setTag(SwitchLink.fromTargetPosition(world, pos).mode(mode).toNbt());
     return stack;

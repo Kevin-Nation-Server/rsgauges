@@ -8,15 +8,11 @@
  */
 package wile.rsgauges;
 
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -48,10 +44,16 @@ public class ModRsGauges
     Auxiliaries.logGitVersion(MODNAME);
     OptionalRecipeCondition.init(MODID, LOGGER);
     ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, ModConfig.COMMON_CONFIG_SPEC);
-    FMLJavaModLoadingContext.get().getModEventBus().addListener(ForgeEvents::onSetup);
-    FMLJavaModLoadingContext.get().getModEventBus().addListener(ForgeEvents::onClientSetup);
+    IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+    modBus.addListener(ForgeEvents::onSetup);
     MinecraftForge.EVENT_BUS.register(this);
     PlayerBlockInteraction.init(MODID, LOGGER);
+    modBus.addListener(ForgeEvents::onClientSetup);
+
+    ModResources.registerSoundEvents(modBus);
+    ModContent.registerTileEntities(modBus);
+    ModContent.registerBlocks(modBus);
+    ModContent.registerItems(modBus);
   }
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -65,21 +67,6 @@ public class ModRsGauges
   @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
   public static final class ForgeEvents
   {
-    @SubscribeEvent
-    public static final void onBlocksRegistry(final RegistryEvent.Register<Block> event)
-    { ModContent.registerBlocks(event); }
-
-    @SubscribeEvent
-    public static final void onItemRegistry(final RegistryEvent.Register<Item> event)
-    { ModContent.registerItems(event); ModContent.registerBlockItems(event); }
-
-    @SubscribeEvent
-    public static final void onTileEntityRegistry(final RegistryEvent.Register<BlockEntityType<?>> event)
-    { ModContent.registerTileEntities(event); }
-
-    @SubscribeEvent
-    public static final void onRegisterSounds(final RegistryEvent.Register<SoundEvent> event)
-    { ModResources.registerSoundEvents(event); }
 
     public static void onSetup(final FMLCommonSetupEvent event)
     {
@@ -120,7 +107,7 @@ public class ModRsGauges
   public static final CreativeModeTab ITEMGROUP = (new CreativeModeTab("tab" + MODID) {
     @OnlyIn(Dist.CLIENT)
     public ItemStack makeIcon()
-    { return new ItemStack(ModContent.INDUSTRIAL_SMALL_LEVER); }
+    { return new ItemStack(ModContent.INDUSTRIAL_SMALL_LEVER.get()); }
   });
 
 }

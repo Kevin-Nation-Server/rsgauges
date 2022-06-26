@@ -55,7 +55,7 @@ public class DayTimerSwitchBlock extends AutoSwitchBlock
     { super(te_type, pos, state); }
 
     public DayTimerSwitchTileEntity(BlockPos pos, BlockState state)
-    { super(ModContent.TET_DAYTIMER_SWITCH, pos, state); }
+    { super(ModContent.TET_DAYTIMER_SWITCH.get(), pos, state); }
 
     @Override
     public boolean activation_config(BlockState state, @Nullable Player player, double x, double y, boolean show_only)
