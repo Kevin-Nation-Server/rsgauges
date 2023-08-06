@@ -15,7 +15,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;//.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;//.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -88,9 +89,9 @@ public class Overlay
     { super(EMPTY_TEXT); mc = SidedProxy.mc(); }
 
     @SubscribeEvent
-    public void onRenderGui(RenderGameOverlayEvent.Post event)
+    public void onRenderGui(RenderGuiOverlayEvent.Post event)
     {
-      if(event.getType() != RenderGameOverlayEvent.ElementType.CHAT) return;
+      //if(event.getType() != RenderGuiOverlayEvent.ElementType.CHAT) return;
       if(deadline() < System.currentTimeMillis()) return;
       if(text()==EMPTY_TEXT) return;
       String txt = text().getString();

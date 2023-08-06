@@ -171,7 +171,9 @@ public class ModConfig
   { return isOptedOut(block.asItem()); }
 
   public static final boolean isOptedOut(final @Nullable Item item)
-  { return (item!=null) && optouts_.contains(ForgeRegistries.ITEMS.getKey(item).getPath()); }
+  { return false;
+    //(item!=null) && optouts_.contains(ForgeRegistries.ITEMS.getKey(item).getPath());
+  }
 
   public static boolean withExperimental()
   { return with_experimental_features_; }

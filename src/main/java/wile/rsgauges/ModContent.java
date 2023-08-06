@@ -1250,7 +1250,7 @@ public class ModContent
   // Tile entities bound exclusively to the blocks above
   //--------------------------------------------------------------------------------------------------------------------
 
-  private static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, MODID);
+  private static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MODID);
 
   public static final RegistryObject<BlockEntityType<AbstractGaugeBlock.GaugeTileEntity>> TET_GAUGE = ModRegistry.register("te_gauge", AbstractGaugeBlock.GaugeTileEntity::new, AbstractGaugeBlock.class);
   public static final RegistryObject<BlockEntityType<SwitchBlock.SwitchTileEntity>> TET_SWITCH = ModRegistry.register("te_switch", SwitchBlock.SwitchTileEntity::new, SwitchBlock.class);
