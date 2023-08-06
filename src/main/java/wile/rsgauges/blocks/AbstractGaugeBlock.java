@@ -134,10 +134,6 @@ public class AbstractGaugeBlock extends RsDirectedBlock implements EntityBlock, 
   }
 
   @Override
-  public boolean shouldCheckWeakPower(BlockState state, LevelReader world, BlockPos pos, Direction side)
-  { return false; }
-
-  @Override
   public boolean getWeakChanges(BlockState state, LevelReader world, BlockPos pos)
   { return true; }
 

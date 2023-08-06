@@ -50,6 +50,7 @@ public class ModRsGauges
     PlayerBlockInteraction.init(MODID, LOGGER);
     modBus.addListener(ForgeEvents::onClientSetup);
 
+    ModCreativeModTabs.register(modBus);
     ModResources.registerSoundEvents(modBus);
     ModContent.registerTileEntities(modBus);
     ModContent.registerBlocks(modBus);
@@ -103,11 +104,5 @@ public class ModRsGauges
   // -------------------------------------------------------------------------------------------------------------------
   // Item group / creative tab
   // -------------------------------------------------------------------------------------------------------------------
-
-  public static final CreativeModeTab ITEMGROUP = (new CreativeModeTab("tab" + MODID) {
-    @OnlyIn(Dist.CLIENT)
-    public ItemStack makeIcon()
-    { return new ItemStack(ModContent.INDUSTRIAL_SMALL_LEVER.get()); }
-  });
 
 }

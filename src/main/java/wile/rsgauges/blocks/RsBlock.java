@@ -122,9 +122,6 @@ public abstract class RsBlock extends Block implements EntityBlock
   public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext selectionContext)
   { return getShape(state, world, pos, selectionContext); }
 
-  @Override
-  public boolean isPossibleToRespawnInThis()
-  { return false; }
 
   @Override
   public boolean isValidSpawn(BlockState state, BlockGetter world, BlockPos pos, SpawnPlacements.Type type, @Nullable EntityType<?> entityType)
@@ -189,11 +186,6 @@ public abstract class RsBlock extends Block implements EntityBlock
   @SuppressWarnings("deprecation")
   public void neighborChanged(BlockState state, Level world, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving)
   {}
-
-  @Override
-  @SuppressWarnings("deprecation")
-  public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder)
-  { return Collections.singletonList(new ItemStack(state.getBlock().asItem())); }
 
   @Override
   @SuppressWarnings("deprecation")

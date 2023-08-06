@@ -33,7 +33,7 @@ public class ModResources
   private static RegistryObject<SoundEvent> createSoundEvent(String name)
   {
     final ResourceLocation rl = new ResourceLocation(ModRsGauges.MODID, name);
-    return SOUND_EVENTS.register(name, () -> new SoundEvent(rl));
+    return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(rl));
   }
 
   public static void registerSoundEvents(IEventBus bus)

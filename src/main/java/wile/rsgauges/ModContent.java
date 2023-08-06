@@ -21,11 +21,10 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -75,7 +74,7 @@ public class ModContent
 
   private static final BlockBehaviour.Properties gauge_metallic_block_properties()
   {
-    return BlockBehaviour.Properties.of(Material.METAL, MaterialColor.METAL)
+    return BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
       .strength(0.5f, 15f)
       .sound(SoundType.METAL)
       .noCollission()
@@ -84,7 +83,7 @@ public class ModContent
 
   private static final BlockBehaviour.Properties gauge_glass_block_properties() {
     return (BlockBehaviour.Properties
-      .of(Material.METAL, MaterialColor.METAL)
+      .copy(Blocks.IRON_BLOCK)
       .strength(0.5f, 15f)
       .sound(SoundType.METAL)
       .noOcclusion()
@@ -95,7 +94,7 @@ public class ModContent
   private static final BlockBehaviour.Properties indicator_metallic_block_properties()
   {
     return BlockBehaviour.Properties
-      .of(Material.METAL, MaterialColor.METAL)
+      .copy(Blocks.IRON_BLOCK)
       .strength(0.5f, 15f)
       .sound(SoundType.METAL)
       .lightLevel((state)->3)
@@ -106,7 +105,7 @@ public class ModContent
   private static final BlockBehaviour.Properties indicator_glass_block_properties()
   {
     return BlockBehaviour.Properties
-        .of(Material.METAL, MaterialColor.METAL)
+        .copy(Blocks.IRON_BLOCK)
         .strength(0.5f, 15f)
         .sound(SoundType.METAL)
           .lightLevel((state)->3)
@@ -117,7 +116,7 @@ public class ModContent
   private static final BlockBehaviour.Properties alarm_lamp_block_properties()
   {
     return BlockBehaviour.Properties
-      .of(Material.METAL, MaterialColor.METAL)
+      .copy(Blocks.IRON_BLOCK)
       .strength(0.5f, 15f)
       .sound(SoundType.METAL)
       .noOcclusion()
@@ -128,7 +127,7 @@ public class ModContent
   private static final BlockBehaviour.Properties colored_sensitive_glass_block_properties()
   {
     return (BlockBehaviour.Properties
-      .of(Material.BUILDABLE_GLASS, MaterialColor.METAL)
+      .copy(Blocks.GLASS)
       .strength(0.35f, 15f)
       .sound(SoundType.METAL)
       .noOcclusion()
@@ -139,7 +138,7 @@ public class ModContent
   private static final BlockBehaviour.Properties light_emitting_sensitive_glass_block_properties()
   {
     return BlockBehaviour.Properties
-      .of(Material.BUILDABLE_GLASS, MaterialColor.METAL)
+      .copy(Blocks.GLASS)
       .strength(0.35f, 15f)
       .sound(SoundType.METAL)
       .noOcclusion().emissiveRendering((s,w,p)->true)
@@ -156,7 +155,7 @@ public class ModContent
   private static final BlockBehaviour.Properties switch_metallic_faint_light_block_properties()
   {
     return BlockBehaviour.Properties
-      .of(Material.METAL, MaterialColor.METAL)
+      .copy(Blocks.IRON_BLOCK)
       .strength(0.5f, 15f)
       .sound(SoundType.METAL)
       .lightLevel((state)->5);
@@ -1241,7 +1240,7 @@ public class ModContent
 //    SwitchBlock.SWITCH_CONFIG_WEAKABLE|SwitchBlock.SWITCH_CONFIG_INVERTABLE|
 //    SwitchBlock.SWITCH_CONFIG_TOUCH_CONFIGURABLE|
 //    SwitchBlock.SWITCH_CONFIG_LINK_TARGET_SUPPORT|SwitchBlock.SWITCH_CONFIG_LINK_SOURCE_SUPPORT,
-//    BlockBehaviour.Properties.of(Material.WOOL, MaterialColor.METAL).strength(0.1f, 32000f).sound(SoundType.METAL),
+//    BlockBehaviour.Properties.of(Material.WOOL).strength(0.1f, 32000f).sound(SoundType.METAL),
 //    new AABB(0,0,0,1,1,1), null,
 //    null, null
 //  ));
@@ -1270,7 +1269,7 @@ public class ModContent
   private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 
   private static Item.Properties default_item_properties()
-  { return (new Item.Properties()).tab(ModRsGauges.ITEMGROUP); }
+  { return (new Item.Properties()); }
 
   public static final RegistryObject<SwitchLinkPearlItem> SWITCH_LINK_PEARL = ITEMS.register("switchlink_pearl", () -> new SwitchLinkPearlItem(
     default_item_properties()
@@ -1298,7 +1297,7 @@ public class ModContent
   {
     for(RegistryObject<Block> entry : BLOCKS.getEntries()) {
       ResourceLocation location = entry.getId();
-      ITEMS.register(location.getPath(), () -> new BlockItem(entry.get(), new Item.Properties().tab(ModRsGauges.ITEMGROUP)));
+      ITEMS.register(location.getPath(), () -> new BlockItem(entry.get(), new Item.Properties()));
     }
     ITEMS.register(bus);
   }
