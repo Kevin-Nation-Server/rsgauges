@@ -9,15 +9,16 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
-import static net.minecraftforge.versions.forge.ForgeVersion.MOD_ID;
+import static wile.rsgauges.ModRsGauges.MODID;
+
 
 public class ModCreativeModTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
+            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-    public static final RegistryObject<CreativeModeTab> TUTORIAL_TAB = CREATIVE_MODE_TABS.register(MOD_ID,
+    public static final RegistryObject<CreativeModeTab> TUTORIAL_TAB = CREATIVE_MODE_TABS.register(MODID,
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModContent.INDUSTRIAL_SMALL_LEVER.get()))
-                    .title(Component.translatable(MOD_ID))
+                    .title(Component.translatable(MODID))
                     .displayItems((pParameters, pOutput) -> {
 
 
